@@ -262,10 +262,10 @@ function buildStudioEnvironment() {
     envScene.add(mesh);
   };
 
-  // Key light — warm, top-right
-  addPanel(35, 35, [35, 40, 25], new THREE.Color(1.00, 0.96, 0.88), 8);
-  // Fill — cool, left
+  // Fill — cool, left (reference level)
   addPanel(50, 30, [-45, 15, 30], new THREE.Color(0.85, 0.92, 1.00), 3);
+  // Fill — warm, right (mirrors left at 80% intensity — soft shadow)
+  addPanel(50, 30, [45, 15, 30], new THREE.Color(0.92, 0.93, 0.97), 2.4);
   // Rim — warm, behind
   addPanel(20, 60, [-15, 20, -50], new THREE.Color(1.00, 0.90, 0.80), 4);
   // Top bounce — soft, overhead
@@ -287,13 +287,13 @@ const pmrem = new THREE.PMREMGenerator(renderer);
 pmrem.compileEquirectangularShader();
 scene.environment = pmrem.fromScene(buildStudioEnvironment(), 0.04).texture;
 
-// Modest directional shaping on top of environment
-const keyLight = new THREE.DirectionalLight(0xfff2e0, 1.0);
-keyLight.position.set(0.6, 1.0, 1.0);
-scene.add(keyLight);
+// Directional shaping — right mirrors left at 80% intensity
 const fillLight = new THREE.DirectionalLight(0xbcd2ff, 0.35);
 fillLight.position.set(-1.0, 0.2, 0.7);
 scene.add(fillLight);
+const keyLight = new THREE.DirectionalLight(0xbcd2ff, 0.28);
+keyLight.position.set(1.0, 0.2, 0.7);
+scene.add(keyLight);
 
 let videoTexture = null;
 let videoPlane = null;
