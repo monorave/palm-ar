@@ -97,10 +97,10 @@
   <div class="row"><span>Smoothing</span><input id="ui-smooth" type="range" min="0" max="1" step="0.01" value="0.5"></div>
   <div class="row"><span>Model size</span><input id="ui-size" type="range" min="0.3" max="2" step="0.01" value="1"></div>
   <div class="row"><span>Vertical offset</span><input id="ui-yoff" type="range" min="-1" max="1" step="0.01" value="0"></div>
-  <div class="row"><span>Exposure</span><input id="ui-exp" type="range" min="0.4" max="2" step="0.01" value="1"></div>
+  <div class="row"><span>Exposure</span><input id="ui-exp" type="range" min="0.4" max="2" step="0.01" value="1.5"></div>
 
   <hr>
-  <label class="chk"><input id="ui-occ" type="checkbox" checked> Finger occlusion</label>
+  <label class="chk"><input id="ui-occ" type="checkbox"> Finger occlusion</label>
   <div class="row"><span>Finger width</span><input id="ui-occ-w" type="range" min="0.5" max="2" step="0.01" value="1"></div>
   <div class="row"><span>Depth bias</span><input id="ui-occ-d" type="range" min="-0.5" max="0.5" step="0.01" value="0"></div>
 
@@ -160,7 +160,7 @@ const state = {
   smoothing: 0.5,
   modelSize: 1.0,
   modelY: 0.0,
-  occlusion: true,
+  occlusion: false,
   occWidth: 1.0,
   occDepth: 0.0,
   showPoints: false
@@ -210,7 +210,7 @@ const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false
 renderer.setClearColor(0x05070a, 1);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.0;
+renderer.toneMappingExposure = 1.5;
 
 const scene  = new THREE.Scene();
 const camera = new THREE.OrthographicCamera(-640, 640, 360, -360, 10, 4000);
