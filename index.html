@@ -95,14 +95,16 @@
   <div id="ui-status">Press "Enable camera"</div>
 
   <div class="row"><span>Smoothing</span><input id="ui-smooth" type="range" min="0" max="1" step="0.01" value="0.5"></div>
-  <div class="row"><span>Model size</span><input id="ui-size" type="range" min="0.3" max="2" step="0.01" value="1"></div>
+  <div class="row"><span>Model size</span><input id="ui-size" type="range" min="0.3" max="3" step="0.01" value="2"></div>
   <div class="row"><span>Vertical offset</span><input id="ui-yoff" type="range" min="-1" max="1" step="0.01" value="0"></div>
   <div class="row"><span>Exposure</span><input id="ui-exp" type="range" min="0.4" max="2" step="0.01" value="1.5"></div>
 
+<!-- Finger occlusion off
   <hr>
   <label class="chk"><input id="ui-occ" type="checkbox"> Finger occlusion</label>
   <div class="row"><span>Finger width</span><input id="ui-occ-w" type="range" min="0.5" max="2" step="0.01" value="1"></div>
   <div class="row"><span>Depth bias</span><input id="ui-occ-d" type="range" min="-0.5" max="0.5" step="0.01" value="0"></div>
+ -->
 
   <hr>
   <label class="chk"><input id="ui-points" type="checkbox"> Show hand points</label>
@@ -151,14 +153,19 @@ const smoothEl  = $('ui-smooth');
 const sizeEl    = $('ui-size');
 const yOffEl    = $('ui-yoff');
 const expEl     = $('ui-exp');
+
+/* 
+Finger occlusion off
 const occEl     = $('ui-occ');
 const occWEl    = $('ui-occ-w');
 const occDEl    = $('ui-occ-d');
+*/
+
 const pointsEl  = $('ui-points');
 
 const state = {
   smoothing: 0.5,
-  modelSize: 1.0,
+  modelSize: 2,
   modelY: 0.0,
   occlusion: false,
   occWidth: 1.0,
@@ -816,9 +823,13 @@ smoothEl.addEventListener('input', () => { state.smoothing = parseFloat(smoothEl
 sizeEl.addEventListener('input', () => { state.modelSize = parseFloat(sizeEl.value); });
 yOffEl.addEventListener('input', () => { state.modelY = parseFloat(yOffEl.value); });
 expEl.addEventListener('input', () => { renderer.toneMappingExposure = parseFloat(expEl.value); });
+
+/* Finger occlusion off
 occEl.addEventListener('change', () => { state.occlusion = occEl.checked; });
 occWEl.addEventListener('input', () => { state.occWidth = parseFloat(occWEl.value); });
 occDEl.addEventListener('input', () => { state.occDepth = parseFloat(occDEl.value); });
+*/
+
 pointsEl.addEventListener('change', () => { state.showPoints = pointsEl.checked; });
 
 function setCollapsed(c) {
